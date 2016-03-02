@@ -7,7 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Spring Boot Blank Project (from https://github.com/making/spring-boot-blank)</name>
+    <name>Gorgona</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -43,6 +43,12 @@
 	<dependency>
 	  <groupId>org.springframework.data</groupId>
 	  <artifactId>spring-data-neo4j</artifactId>
+	  <exclusions>
+	    <exclusion>
+	      <groupId>javax.persistence</groupId>
+	      <artifactId>com.springsource.javax.persistence</artifactId>
+	    </exclusion>
+	  </exclusions>
 	</dependency>
 	<dependency>
 	  <groupId>org.hibernate</groupId>
@@ -54,9 +60,9 @@
 	  <version>2.2.4</version>
 	</dependency>
         <dependency>
-            <groupId>org.bgee.log4jdbc-log4j2</groupId>
-            <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
-            <version>${log4jdbc.log4j2.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.2.5.RELEASE</version>
         </dependency>
     </dependencies>
     <build>
