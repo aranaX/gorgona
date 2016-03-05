@@ -9,9 +9,6 @@ import org.springframework.data.neo4j.repository.GraphRepository;
  * @author aranax
  */
 public interface PersonRepository extends GraphRepository<Person> {
-
-    Person findByName(String name);
-
-    Iterable<Person> findByTeammatesName(String name);
-
+    Person findByEmail( String email );
+    //Iterable<Package> findByPackagesName( String name );
 }

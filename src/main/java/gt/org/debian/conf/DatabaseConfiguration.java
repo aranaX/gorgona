@@ -9,6 +9,7 @@ package gt.org.debian.conf;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.config.Neo4jConfiguration;
@@ -18,10 +19,15 @@ import org.springframework.data.neo4j.config.Neo4jConfiguration;
  * @author aranax
  */
 @Configuration
-@EnableNeo4jRepositories(basePackages = "gt.org.debian.repository")
+@EnableNeo4jRepositories( basePackages = "gt.org.debian.repository" )
+@ComponentScan( basePackages = { "gt.org.debian.domain" } )
 public class DatabaseConfiguration extends Neo4jConfiguration {
     @Bean
     public GraphDatabaseService graphDatabaseService() {
         return new GraphDatabaseFactory().newEmbeddedDatabase("accessingdataneo4j.db");
+    }
+
+    public DatabaseConfiguration() {
+        setBasePackage( "gt.org.debian.gorgona.domain" );
     }
 }

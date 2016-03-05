@@ -1,8 +1,6 @@
 package gt.org.debian.gorgona.domain;
 
-import java.util.HashSet;
 import java.util.Set;
-
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
@@ -11,12 +9,11 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 
 @NodeEntity
 public class Person {
-
     @GraphId private Long id;
     private String nick;
     private String email;    
     @RelatedTo(type="MAINTAINS", direction=Direction.OUTGOING)
-    private @Fetch Set<Package> packages;
+    private @Fetch Set<SourcePackage> packages;
     @RelatedTo(type="REPORTS", direction=Direction.OUTGOING)
     private @Fetch Set<Bug> bugsReported;
 
@@ -61,11 +58,11 @@ public class Person {
         this.email = email;
     }
 
-    public Set<Package> getPackages() {
+    public Set<SourcePackage> getPackages() {
         return packages;
     }
 
-    public void setPackages( Set<Package> packages ) {
+    public void setPackages( Set<SourcePackage> packages ) {
         this.packages = packages;
     }
 

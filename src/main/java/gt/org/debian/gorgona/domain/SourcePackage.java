@@ -18,29 +18,29 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
  * @author aranax
  */
 @NodeEntity
-public class Package {
+public class SourcePackage {
     
     @GraphId private Long id;
     private String name;
     private String version;
 
     @RelatedTo(type="DEPENDS", direction=Direction.BOTH)
-    private @Fetch Set<Package> dependencies;
+    private @Fetch Set<SourcePackage> dependencies;
     
     @RelatedTo(type="RECOMMENDS", direction=Direction.BOTH)
-    private @Fetch Set<Package> recomendetations;
+    private @Fetch Set<SourcePackage> recomendetations;
     
     @RelatedTo(type="SUGGESTS", direction=Direction.BOTH)
-    private @Fetch Set<Package> sugestions;
+    private @Fetch Set<SourcePackage> sugestions;
     
     @RelatedTo(type="BREAKS", direction=Direction.BOTH)
-    private @Fetch Set<Package> brokes;
+    private @Fetch Set<SourcePackage> brokes;
     
     @RelatedTo(type="REPLACES", direction=Direction.BOTH)
-    private @Fetch Set<Package> replaces;
+    private @Fetch Set<SourcePackage> replaces;
     
-    public Package() {}
-    public Package(final String name, final String version) { 
+    public SourcePackage() {}
+    public SourcePackage(final String name, final String version) { 
         this.name = name;
         this.version = version;
     }
@@ -69,43 +69,43 @@ public class Package {
         this.version = version;
     }
 
-    public Set<Package> getDependencies() {
+    public Set<SourcePackage> getDependencies() {
         return dependencies;
     }
 
-    public void setDependencies( Set<Package> dependencies ) {
+    public void setDependencies( Set<SourcePackage> dependencies ) {
         this.dependencies = dependencies;
     }
 
-    public Set<Package> getRecomendetations() {
+    public Set<SourcePackage> getRecomendetations() {
         return recomendetations;
     }
 
-    public void setRecomendetations( Set<Package> recomendetations ) {
+    public void setRecomendetations( Set<SourcePackage> recomendetations ) {
         this.recomendetations = recomendetations;
     }
 
-    public Set<Package> getSugestions() {
+    public Set<SourcePackage> getSugestions() {
         return sugestions;
     }
 
-    public void setSugestions( Set<Package> sugestions ) {
+    public void setSugestions( Set<SourcePackage> sugestions ) {
         this.sugestions = sugestions;
     }
 
-    public Set<Package> getBrokes() {
+    public Set<SourcePackage> getBrokes() {
         return brokes;
     }
 
-    public void setBrokes( Set<Package> brokes ) {
+    public void setBrokes( Set<SourcePackage> brokes ) {
         this.brokes = brokes;
     }
 
-    public Set<Package> getReplaces() {
+    public Set<SourcePackage> getReplaces() {
         return replaces;
     }
 
-    public void setReplaces( Set<Package> replaces ) {
+    public void setReplaces( Set<SourcePackage> replaces ) {
         this.replaces = replaces;
     }
 

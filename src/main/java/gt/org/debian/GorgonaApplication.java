@@ -21,7 +21,7 @@ import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.core.GraphDatabase;
 
 @ComponentScan
-@Import(DatabaseConfiguration.class)
+@Import( DatabaseConfiguration.class )
 @SpringBootApplication
 public class GorgonaApplication implements CommandLineRunner {
 
