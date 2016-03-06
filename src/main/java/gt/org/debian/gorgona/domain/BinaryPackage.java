@@ -22,6 +22,16 @@ public class BinaryPackage {
     private String version;
     private String arch;
 
+    @RelatedTo(type="SUGGEST", direction=Direction.BOTH)
+    private @Fetch Set<BinaryPackage> sugestions;
+    
+    @RelatedTo(type="BREAK", direction=Direction.BOTH)
+    private @Fetch Set<BinaryPackage> breakes;
+    
+    @RelatedTo(type="REPLACE", direction=Direction.BOTH)
+    private @Fetch Set<BinaryPackage> replaces;
+
+
     public BinaryPackage() {
     }
 

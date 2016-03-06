@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gt.org.debian.gorgona.domain;
 
 import java.util.Set;
@@ -18,26 +12,16 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
  * @author aranax
  */
 @NodeEntity
-public class SourcePackage {
-    
+public class SourcePackage {    
     @GraphId private Long id;
     private String name;
     private String version;
 
-    @RelatedTo(type="DEPENDS", direction=Direction.BOTH)
-    private @Fetch Set<SourcePackage> dependencies;
+    @RelatedTo(type="DEPEND_ON_BUILD", direction=Direction.Ingoing)
+    private @Fetch Set<BinaryPackages> buildDependencies;
     
-    @RelatedTo(type="RECOMMENDS", direction=Direction.BOTH)
-    private @Fetch Set<SourcePackage> recomendetations;
-    
-    @RelatedTo(type="SUGGESTS", direction=Direction.BOTH)
-    private @Fetch Set<SourcePackage> sugestions;
-    
-    @RelatedTo(type="BREAKS", direction=Direction.BOTH)
-    private @Fetch Set<SourcePackage> brokes;
-    
-    @RelatedTo(type="REPLACES", direction=Direction.BOTH)
-    private @Fetch Set<SourcePackage> replaces;
+    @RelatedTo(type="BUILD", direction=Direction.Outgoingx)
+    private @Fetch Set<BinaryPackage> binaryBuilded;
     
     public SourcePackage() {}
     public SourcePackage(final String name, final String version) { 

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gt.org.debian.gorgona.domain;
 
 import org.springframework.data.neo4j.annotation.GraphId;
@@ -22,6 +16,13 @@ public class Developer {
     private String tipo; //individual, team
     private String member; //internal, external
 
+    @RelatedTo(type="MAINTAIN", direction=Direction.OUTGOING)
+    private @Fetch Set<SourcePackage> packagesMantained;
+    @RelatedTo(type="REPORT", direction=Direction.OUTGOING)
+    private @Fetch Set<Bug> bugsReported;
+    @RelatedTo(type="UPLOAD", direction=Direction.OUTGOING)
+    private @Fetch Set<SourcePackage> packagesUploaded;
+    
     public Developer() {
     }
 
