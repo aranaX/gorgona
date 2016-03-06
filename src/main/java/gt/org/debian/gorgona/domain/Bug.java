@@ -28,7 +28,9 @@ public class Bug {
     private String tags[];
 
     @RelatedTo(type="AFFECTS", direction=Direction.OUTGOING)
-    private Set<SourcePackage> packagesAfected;
+    private Set<SourcePackage> sourcePackagesAfected;
+    @RelatedTo( type = "AFFECTS", direction = Direction.OUTGOING )
+    private Set<BinaryPackage> binaryPackagesAfected;
 
     public Bug(){}
     public Bug(final Long number, final Date date, final String severity){
@@ -76,11 +78,20 @@ public class Bug {
     public void setTags( String[] tags ) {
         this.tags = tags;
     }
-    public Set<SourcePackage> getPackagesAfected() {
-        return packagesAfected;
+
+    public Set<SourcePackage> getSourcePackagesAfected() {
+        return sourcePackagesAfected;
     }
 
-    public void setPackagesAfected( Set<SourcePackage> packagesAfected ) {
-        this.packagesAfected = packagesAfected;
-    }  
+    public void setSourcePackagesAfected( Set<SourcePackage> sourcePackagesAfected ) {
+        this.sourcePackagesAfected = sourcePackagesAfected;
+    }
+
+    public Set<BinaryPackage> getBinaryPackagesAfected() {
+        return binaryPackagesAfected;
+    }
+
+    public void setBinaryPackagesAfected( Set<BinaryPackage> binaryPackagesAfected ) {
+        this.binaryPackagesAfected = binaryPackagesAfected;
+    }
 }

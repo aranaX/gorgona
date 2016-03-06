@@ -1,23 +1,15 @@
 package gt.org.debian;
 
-import gt.org.debian.repository.PersonRepository;
 import gt.org.debian.conf.DatabaseConfiguration;
-import gt.org.debian.gorgona.domain.Person;
+import gt.org.debian.gorgona.domain.BinaryPackage;
+import gt.org.debian.repository.BinaryPackageRepository;
 import java.io.File;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.io.fs.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
-import org.springframework.boot.orm.jpa.EntityScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
-import org.springframework.data.neo4j.config.Neo4jConfiguration;
 import org.springframework.data.neo4j.core.GraphDatabase;
 
 @ComponentScan
@@ -25,13 +17,13 @@ import org.springframework.data.neo4j.core.GraphDatabase;
 @SpringBootApplication
 public class GorgonaApplication implements CommandLineRunner {
 
+    @Autowired
+    BinaryPackageRepository BinaryPackageRepository;
+    @Autowired
+    GraphDatabase graphDatabase;
 
-	@Autowired PersonRepository personRepository;
-
-	@Autowired GraphDatabase graphDatabase;
-
-        @Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run( String... args ) throws Exception {
 
 //		Person greg = new Person("Greg");
 //		Person roy = new Person("Roy");

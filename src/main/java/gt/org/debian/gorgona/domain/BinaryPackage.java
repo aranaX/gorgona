@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gt.org.debian.gorgona.domain;
 
+import java.util.Set;
+import org.neo4j.graphdb.Direction;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 
 /**
  *
@@ -22,15 +20,19 @@ public class BinaryPackage {
     private String version;
     private String arch;
 
-    @RelatedTo(type="SUGGEST", direction=Direction.BOTH)
-    private @Fetch Set<BinaryPackage> sugestions;
-    
-    @RelatedTo(type="BREAK", direction=Direction.BOTH)
-    private @Fetch Set<BinaryPackage> breakes;
-    
-    @RelatedTo(type="REPLACE", direction=Direction.BOTH)
-    private @Fetch Set<BinaryPackage> replaces;
-
+    @RelatedTo( type = "DEPEND_ON_EXEC", direction = Direction.OUTGOING )
+    private @Fetch
+    Set<BinaryPackage> dependedPackages;
+    @RelatedTo( type = "RECOMMEND", direction = Direction.OUTGOING )
+    private @Fetch
+    Set<BinaryPackage> recomendedPackages;
+    @RelatedTo( type = "SUGGEST", direction = Direction.OUTGOING )
+    private @Fetch Set<BinaryPackage> sugestedPackages;    
+    @RelatedTo( type = "BREAK", direction = Direction.OUTGOING )
+    private @Fetch Set<BinaryPackage> brokePackages;    
+    @RelatedTo( type = "REPLACE", direction = Direction.OUTGOING )
+    private @Fetch
+    Set<BinaryPackage> replacedPackages;
 
     public BinaryPackage() {
     }
@@ -74,5 +76,44 @@ public class BinaryPackage {
         this.id = id;
     }
 
+    public Set<BinaryPackage> getSugestedPackages() {
+        return sugestedPackages;
+    }
+
+    public void setSugestedPackages( Set<BinaryPackage> sugestedPackages ) {
+        this.sugestedPackages = sugestedPackages;
+    }
+
+    public Set<BinaryPackage> getBrokePackages() {
+        return brokePackages;
+    }
+
+    public void setBrokePackages( Set<BinaryPackage> brokePackages ) {
+        this.brokePackages = brokePackages;
+    }
+
+    public Set<BinaryPackage> getReplacedPackages() {
+        return replacedPackages;
+    }
+
+    public void setReplacedPackages( Set<BinaryPackage> replacedPackages ) {
+        this.replacedPackages = replacedPackages;
+    }
+
+    public Set<BinaryPackage> getDependedPackages() {
+        return dependedPackages;
+    }
+
+    public void setDependedPackages( Set<BinaryPackage> dependedPackages ) {
+        this.dependedPackages = dependedPackages;
+    }
+
+    public Set<BinaryPackage> getRecomendedPackages() {
+        return recomendedPackages;
+    }
+
+    public void setRecomendedPackages( Set<BinaryPackage> recomendedPackages ) {
+        this.recomendedPackages = recomendedPackages;
+    }
 
 }

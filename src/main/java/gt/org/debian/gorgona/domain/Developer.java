@@ -1,7 +1,11 @@
 package gt.org.debian.gorgona.domain;
 
+import java.util.Set;
+import org.neo4j.graphdb.Direction;
+import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.annotation.RelatedTo;
 
 /**
  *
@@ -10,7 +14,7 @@ import org.springframework.data.neo4j.annotation.NodeEntity;
 @NodeEntity
 public class Developer {
     @GraphId
-    private long id;
+    private Long id;
     private String nickname;
     private String email;
     private String tipo; //individual, team
@@ -26,7 +30,7 @@ public class Developer {
     public Developer() {
     }
 
-    public Developer( final long id, final String nickname, final String email,
+    public Developer( final Long id, final String nickname, final String email,
             final String tipo, final String member ) {
         this.id = id;
         this.nickname = nickname;
@@ -35,11 +39,11 @@ public class Developer {
         this.member = member;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId( long id ) {
+    public void setId( Long id ) {
         this.id = id;
     }
 
@@ -74,6 +78,4 @@ public class Developer {
     public void setTipo( String tipo ) {
         this.tipo = tipo;
     }
-
-
 }
