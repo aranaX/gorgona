@@ -4,34 +4,33 @@
  * and open the template in the editor.
  */
 
-package gt.org.debian.gorgona.domain;
+package gt.org.debian.gorgona.domain.relations;
 
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
-import org.springframework.data.neo4j.annotation.StartNode;
+import gt.org.debian.gorgona.domain.BinaryPackage;
+import gt.org.debian.types.PackageRelation;
+import org.neo4j.ogm.annotation.EndNode;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.RelationshipEntity;
+import org.neo4j.ogm.annotation.StartNode;
 
 /**
  *
  * @author aranax
  */
-@RelationshipEntity( type = "SUGGEST" )
-public class SuggestDepRel {
+@RelationshipEntity( type = PackageRelation.BREAK )
+public class BreakDepRel {
 
     @GraphId
     private Long id;
-    @Fetch
     @StartNode
     private BinaryPackage binaryOrigin;
-    @Fetch
     @EndNode
     private BinaryPackage binaryDestiny;
 
-    public SuggestDepRel() {
+    public BreakDepRel() {
     }
 
-    public SuggestDepRel( final Long id, final BinaryPackage binaryOrigin, final BinaryPackage binaryDestiny ) {
+    public BreakDepRel( final Long id, final BinaryPackage binaryOrigin, final BinaryPackage binaryDestiny ) {
         this.id = id;
         this.binaryOrigin = binaryOrigin;
         this.binaryDestiny = binaryDestiny;

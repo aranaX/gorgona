@@ -1,30 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package gt.org.debian.gorgona.domain.relations;
 
-package gt.org.debian.gorgona.domain;
-
+import gt.org.debian.gorgona.domain.Developer;
+import gt.org.debian.gorgona.domain.SourcePackage;
+import gt.org.debian.types.DeveloperRelation;
 import java.util.Date;
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
-import org.springframework.data.neo4j.annotation.StartNode;
+import org.neo4j.ogm.annotation.EndNode;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.RelationshipEntity;
+import org.neo4j.ogm.annotation.StartNode;
 
 /**
  *
  * @author aranax
  */
-@RelationshipEntity( type = "UPLOAD" )
+@RelationshipEntity( type = DeveloperRelation.UPLOAD )
 public class UploadRel {
     @GraphId
-    private Long id;
-    @Fetch
+    private Long id;    
     @StartNode
-    private Developer developer;
-    @Fetch
+    private Developer developer;    
     @EndNode
     private SourcePackage sourcePackage;
     private Date date;

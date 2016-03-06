@@ -1,29 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package gt.org.debian.gorgona.domain.relations;
 
-package gt.org.debian.gorgona.domain;
-
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
+import gt.org.debian.gorgona.domain.BinaryPackage;
+import gt.org.debian.gorgona.domain.SourcePackage;
+import gt.org.debian.types.PackageRelation;
+import org.neo4j.ogm.annotation.EndNode;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.RelationshipEntity;
+import org.neo4j.ogm.annotation.StartNode;
 
 /**
  *
  * @author aranax
  */
-@RelationshipEntity( type = "DEPEND_ON_BUILD" )
+@RelationshipEntity( type = PackageRelation.DEPEND_ON_BUILD )
 public class BuildDependRel {
 
     @GraphId
-    private Long id;
-    @Fetch
-    @EndNode
+    private Long id;    
+    @StartNode
     private SourcePackage source;
-    @Fetch @EndNode
+    @EndNode
     private BinaryPackage binary;
 
     public BuildDependRel() {

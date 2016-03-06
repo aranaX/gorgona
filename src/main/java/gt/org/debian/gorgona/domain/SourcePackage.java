@@ -1,11 +1,10 @@
 package gt.org.debian.gorgona.domain;
 
+import gt.org.debian.types.PackageRelation;
 import java.util.Set;
-import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 /**
  *
@@ -17,11 +16,11 @@ public class SourcePackage {
     private String name;
     private String version;
 
-    @RelatedTo(type="DEPEND_ON_BUILD", direction=Direction.Ingoing)
-    private @Fetch Set<BinaryPackages> buildDependencies;
+    @Relationship( type = PackageRelation.DEPEND_ON_BUILD, direction = Relationship.INCOMING )
+    private  Set<BinaryPackage> buildDependencies;
     
-    @RelatedTo(type="BUILD", direction=Direction.Outgoingx)
-    private @Fetch Set<BinaryPackage> binaryBuilded;
+    @Relationship( type = PackageRelation.BUILD, direction = Relationship.OUTGOING )
+    private  Set<BinaryPackage> binaryBuilded;
     
     public SourcePackage() {}
     public SourcePackage(final String name, final String version) { 
@@ -53,46 +52,19 @@ public class SourcePackage {
         this.version = version;
     }
 
-    public Set<SourcePackage> getDependencies() {
-        return dependencies;
+    public Set<BinaryPackage> getBuildDependencies() {
+        return buildDependencies;
     }
 
-    public void setDependencies( Set<SourcePackage> dependencies ) {
-        this.dependencies = dependencies;
+    public void setBuildDependencies( Set<BinaryPackage> buildDependencies ) {
+        this.buildDependencies = buildDependencies;
     }
 
-    public Set<SourcePackage> getRecomendetations() {
-        return recomendetations;
+    public Set<BinaryPackage> getBinaryBuilded() {
+        return binaryBuilded;
     }
 
-    public void setRecomendetations( Set<SourcePackage> recomendetations ) {
-        this.recomendetations = recomendetations;
+    public void setBinaryBuilded( Set<BinaryPackage> binaryBuilded ) {
+        this.binaryBuilded = binaryBuilded;
     }
-
-    public Set<SourcePackage> getSugestions() {
-        return sugestions;
-    }
-
-    public void setSugestions( Set<SourcePackage> sugestions ) {
-        this.sugestions = sugestions;
-    }
-
-    public Set<SourcePackage> getBrokes() {
-        return brokes;
-    }
-
-    public void setBrokes( Set<SourcePackage> brokes ) {
-        this.brokes = brokes;
-    }
-
-    public Set<SourcePackage> getReplaces() {
-        return replaces;
-    }
-
-    public void setReplaces( Set<SourcePackage> replaces ) {
-        this.replaces = replaces;
-    }
-
-    
-
 }

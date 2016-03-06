@@ -1,11 +1,10 @@
 package gt.org.debian.gorgona.domain;
 
+import gt.org.debian.types.DeveloperRelation;
 import java.util.Set;
-import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 /**
  *
@@ -20,13 +19,20 @@ public class Developer {
     private String tipo; //individual, team
     private String member; //internal, external
 
-    @RelatedTo(type="MAINTAIN", direction=Direction.OUTGOING)
-    private @Fetch Set<SourcePackage> packagesMantained;
-    @RelatedTo(type="REPORT", direction=Direction.OUTGOING)
-    private @Fetch Set<Bug> bugsReported;
-    @RelatedTo(type="UPLOAD", direction=Direction.OUTGOING)
-    private @Fetch Set<SourcePackage> packagesUploaded;
-    
+    @Relationship( type = DeveloperRelation.MAINTAIN, direction = Relationship.OUTGOING )
+    private  Set<SourcePackage> packagesMantained;
+    @Relationship( type = DeveloperRelation.REPORT, direction = Relationship.OUTGOING )
+    private 
+    Set<Bug> bugsReported;
+    @Relationship( type = DeveloperRelation.UPLOAD, direction = Relationship.OUTGOING )
+    private  Set<SourcePackage> packagesUploaded;
+    @Relationship( type = DeveloperRelation.DEVELOP, direction = Relationship.OUTGOING )
+    private 
+    Set<SourcePackage> packagesDeveloped;
+    @Relationship( type = DeveloperRelation.REPAIR, direction = Relationship.OUTGOING )
+    private 
+    Set<SourcePackage> packagesRepaired;
+
     public Developer() {
     }
 
@@ -77,5 +83,45 @@ public class Developer {
 
     public void setTipo( String tipo ) {
         this.tipo = tipo;
+    }
+
+    public Set<SourcePackage> getPackagesMantained() {
+        return packagesMantained;
+    }
+
+    public void setPackagesMantained( Set<SourcePackage> packagesMantained ) {
+        this.packagesMantained = packagesMantained;
+    }
+
+    public Set<Bug> getBugsReported() {
+        return bugsReported;
+    }
+
+    public void setBugsReported( Set<Bug> bugsReported ) {
+        this.bugsReported = bugsReported;
+    }
+
+    public Set<SourcePackage> getPackagesUploaded() {
+        return packagesUploaded;
+    }
+
+    public void setPackagesUploaded( Set<SourcePackage> packagesUploaded ) {
+        this.packagesUploaded = packagesUploaded;
+    }
+
+    public Set<SourcePackage> getPackagesDeveloped() {
+        return packagesDeveloped;
+    }
+
+    public void setPackagesDeveloped( Set<SourcePackage> packagesDeveloped ) {
+        this.packagesDeveloped = packagesDeveloped;
+    }
+
+    public Set<SourcePackage> getPackagesRepaired() {
+        return packagesRepaired;
+    }
+
+    public void setPackagesRepaired( Set<SourcePackage> packagesRepaired ) {
+        this.packagesRepaired = packagesRepaired;
     }
 }

@@ -1,16 +1,16 @@
 package gt.org.debian.gorgona.domain;
 
+import gt.org.debian.types.PackageRelation;
 import java.util.Set;
-import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 /**
  *
  * @author aranax
  */
+
 @NodeEntity
 public class BinaryPackage {
 
@@ -20,19 +20,16 @@ public class BinaryPackage {
     private String version;
     private String arch;
 
-    @RelatedTo( type = "DEPEND_ON_EXEC", direction = Direction.OUTGOING )
-    private @Fetch
-    Set<BinaryPackage> dependedPackages;
-    @RelatedTo( type = "RECOMMEND", direction = Direction.OUTGOING )
-    private @Fetch
-    Set<BinaryPackage> recomendedPackages;
-    @RelatedTo( type = "SUGGEST", direction = Direction.OUTGOING )
-    private @Fetch Set<BinaryPackage> sugestedPackages;    
-    @RelatedTo( type = "BREAK", direction = Direction.OUTGOING )
-    private @Fetch Set<BinaryPackage> brokePackages;    
-    @RelatedTo( type = "REPLACE", direction = Direction.OUTGOING )
-    private @Fetch
-    Set<BinaryPackage> replacedPackages;
+    @Relationship( type = PackageRelation.DEPEND_ON_EXEC, direction = Relationship.OUTGOING )
+    private Set<BinaryPackage> dependedPackages;
+    @Relationship( type = PackageRelation.RECOMMEND, direction = Relationship.OUTGOING )
+    private  Set<BinaryPackage> recomendedPackages;
+    @Relationship( type = PackageRelation.SUGGEST, direction = Relationship.OUTGOING )
+    private  Set<BinaryPackage> sugestedPackages;    
+    @Relationship( type = PackageRelation.BREAK, direction = Relationship.OUTGOING )
+    private  Set<BinaryPackage> brokePackages;    
+    @Relationship( type = PackageRelation.REPLACE, direction = Relationship.OUTGOING )
+    private  Set<BinaryPackage> replacedPackages;
 
     public BinaryPackage() {
     }

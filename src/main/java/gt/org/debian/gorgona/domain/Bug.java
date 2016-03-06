@@ -6,12 +6,12 @@
 
 package gt.org.debian.gorgona.domain;
 
+import gt.org.debian.types.BugRelation;
 import java.util.Date;
 import java.util.Set;
-import org.neo4j.graphdb.Direction;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.NodeEntity;
-import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 /**
  *
@@ -27,9 +27,9 @@ public class Bug {
     private String severity;
     private String tags[];
 
-    @RelatedTo(type="AFFECTS", direction=Direction.OUTGOING)
+    @Relationship( type = BugRelation.AFFECTS, direction = Relationship.OUTGOING )
     private Set<SourcePackage> sourcePackagesAfected;
-    @RelatedTo( type = "AFFECTS", direction = Direction.OUTGOING )
+    @Relationship( type = BugRelation.AFFECTS, direction = Relationship.OUTGOING )
     private Set<BinaryPackage> binaryPackagesAfected;
 
     public Bug(){}

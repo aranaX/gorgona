@@ -1,34 +1,34 @@
-package gt.org.debian.gorgona.domain;
+package gt.org.debian.gorgona.domain.relations;
 
+import gt.org.debian.gorgona.domain.Bug;
+import gt.org.debian.gorgona.domain.Developer;
+import gt.org.debian.types.DeveloperRelation;
 import java.util.Date;
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.Fetch;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
-import org.springframework.data.neo4j.annotation.StartNode;
+import org.neo4j.ogm.annotation.EndNode;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.RelationshipEntity;
+import org.neo4j.ogm.annotation.StartNode;
 
 /**
  *
  * @author aranax
  */
-@RelationshipEntity( type = "REPAIR" )
-public class RepairRel {
+@RelationshipEntity( type = DeveloperRelation.REPORT )
+public class ReportRel {
 
     @GraphId
-    private Long id;
-    @Fetch
+    private Long id;    
     @StartNode
-    private Developer developer;
-    @Fetch
+    private Developer developer;    
     @EndNode
     private Bug bug;
     private Date date;
     private String message;
 
-    public RepairRel() {
+    public ReportRel() {
     }
 
-    public RepairRel( final Long id, final Developer developer, final Bug bug, final Date date, final String message ) {
+    public ReportRel( final Long id, final Developer developer, final Bug bug, final Date date, final String message ) {
         this.id = id;
         this.developer = developer;
         this.bug = bug;

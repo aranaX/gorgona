@@ -1,34 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package gt.org.debian.gorgona.domain.relations;
 
-package gt.org.debian.gorgona.domain;
-
-import org.springframework.data.neo4j.annotation.EndNode;
-import org.springframework.data.neo4j.annotation.GraphId;
-import org.springframework.data.neo4j.annotation.RelationshipEntity;
-import org.springframework.data.neo4j.annotation.StartNode;
+import gt.org.debian.gorgona.domain.BinaryPackage;
+import gt.org.debian.types.PackageRelation;
+import org.neo4j.ogm.annotation.EndNode;
+import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.RelationshipEntity;
+import org.neo4j.ogm.annotation.StartNode;
 
 /**
  *
  * @author aranax
  */
-@RelationshipEntity( type = "BREAK" )
-public class BreakDepRel {
+@RelationshipEntity( type = PackageRelation.REPLACE )
+public class ReplaceDepRel {
 
     @GraphId
-    private Long id;
+    private Long id;    
     @StartNode
-    private BinaryPackage binaryOrigin;
+    private BinaryPackage binaryOrigin;    
     @EndNode
     private BinaryPackage binaryDestiny;
 
-    public BreakDepRel() {
+    public ReplaceDepRel() {
     }
 
-    public BreakDepRel( final Long id, final BinaryPackage binaryOrigin, final BinaryPackage binaryDestiny ) {
+    public ReplaceDepRel( final Long id, final BinaryPackage binaryOrigin, final BinaryPackage binaryDestiny ) {
         this.id = id;
         this.binaryOrigin = binaryOrigin;
         this.binaryDestiny = binaryDestiny;

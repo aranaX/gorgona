@@ -1,7 +1,6 @@
 package gt.org.debian;
 
 import gt.org.debian.conf.DatabaseConfiguration;
-import gt.org.debian.gorgona.domain.BinaryPackage;
 import gt.org.debian.repository.BinaryPackageRepository;
 import java.io.File;
 import org.neo4j.io.fs.FileUtils;
@@ -10,7 +9,6 @@ import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
-import org.springframework.data.neo4j.core.GraphDatabase;
 
 @ComponentScan
 @Import( DatabaseConfiguration.class )
@@ -19,9 +17,7 @@ public class GorgonaApplication implements CommandLineRunner {
 
     @Autowired
     BinaryPackageRepository BinaryPackageRepository;
-    @Autowired
-    GraphDatabase graphDatabase;
-
+   
     @Override
     public void run( String... args ) throws Exception {
 
